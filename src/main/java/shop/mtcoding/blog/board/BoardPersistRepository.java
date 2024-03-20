@@ -35,4 +35,11 @@ public class BoardPersistRepository {
         Board board = findById(id);
         board.update(reqDTO);
     }
+
+    @Transactional
+    public void deleteById(Integer id) {
+        Query query = em.createQuery("delete from Board b where b.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
 }
