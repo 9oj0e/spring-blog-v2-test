@@ -29,4 +29,10 @@ public class BoardPersistRepository {
         Board board = em.find(Board.class, id);
         return board;
     }
+
+    @Transactional
+    public void updateById(Integer id, BoardRequest.UpdateDTO reqDTO) {
+        Board board = findById(id);
+        board.update(reqDTO);
+    }
 }

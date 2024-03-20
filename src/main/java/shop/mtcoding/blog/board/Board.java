@@ -25,4 +25,9 @@ public class Board {
         this.title = title;
         this.content = content;
     }
+
+    public void update(BoardRequest.UpdateDTO reqDTO) {
+        this.title = reqDTO.getTitle();
+        this.content = reqDTO.getContent();
+    }
 }
