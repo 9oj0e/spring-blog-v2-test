@@ -3,6 +3,7 @@ package shop.mtcoding.blog.board;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -16,6 +17,8 @@ public class Board {
     private Integer id;
     private String title;
     private String content;
+
+    @CreationTimestamp
     private Timestamp createdAt;
 
     public Board(String title, String content) {
