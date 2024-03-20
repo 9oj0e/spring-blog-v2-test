@@ -4,7 +4,7 @@ import lombok.Data;
 
 public class UserRequest {
     @Data
-    public class SaveDTO {
+    public static class SaveDTO {
         private String username;
         private String password;
         private String email;
@@ -17,7 +17,12 @@ public class UserRequest {
         }
     }
     @Data
-    public class UpdateDTO {
+    public static class LoginDTO {
+        private String username;
+        private String password;
+    }
+    @Data
+    public static class UpdateDTO {
         private String username;
         private String password;
         private String email;

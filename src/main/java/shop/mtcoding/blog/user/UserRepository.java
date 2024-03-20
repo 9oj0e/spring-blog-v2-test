@@ -5,8 +5,6 @@ import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Repository
 public class UserRepository {
@@ -24,10 +22,12 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> findAll() {
-        Query query = em.createQuery("SELECT u FROM User u ORDER BY u.id DESC");
+    public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password", User.class);
+        query.setParameter("username", requestDTO.getUsername());
+        query.setParameter("password", requestDTO.getPassword());
 
-        return query.getResultList();
+        return (User) query.getSingleResult();
     }
 
     public User updateById(Integer id, UserRequest.UpdateDTO requestDTO) {
@@ -36,6 +36,7 @@ public class UserRepository {
 
         return user;
     }
+
     public void deleteById(Integer id) {
         User user = findById(id);
 
