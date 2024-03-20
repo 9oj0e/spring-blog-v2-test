@@ -12,7 +12,7 @@ public class BoardRequest {
 
         public Board toEntity(User user) {
             return Board.builder()
-                    .username(user.getUsername())
+                    .user(user)
                     .title(this.title)
                     .content(this.title)
                     .build();
