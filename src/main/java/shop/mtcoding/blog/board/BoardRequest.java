@@ -14,4 +14,15 @@ public class BoardRequest {
             this.content = content;
         }
     }
+
+    @Data
+    public static class UpdateDTO {
+        private String title;
+        private String content;
+
+        public UpdateDTO(String title, String content) {
+            this.title = title;
+            this.content = content;
+        }
+    }
 }
