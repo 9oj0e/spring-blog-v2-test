@@ -17,7 +17,7 @@ public class UserController {
     @GetMapping("/join-form")
     public String joinForm() {
 
-        return "user/join-form";
+        return "/user/join-form";
     }
 
     @PostMapping("/join")
@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/login-form")
     public String loginForm() {
-        return "user/login-form";
+        return "/user/login-form";
     }
 
     @PostMapping("/login")
@@ -45,7 +45,7 @@ public class UserController {
         User user = userRepository.findById(id);
         request.setAttribute("user", user);
 
-        return "redirect:/";
+        return "/user/update-form";
     }
 
     @PostMapping("/user/{id}/update")

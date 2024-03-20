@@ -3,9 +3,11 @@ package shop.mtcoding.blog.user;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "user_tb")

@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class BoardRepository {
     private final EntityManager em;
 
+    @Transactional
     public Board save(Board board) {
         em.persist(board);
 
@@ -30,12 +32,15 @@ public class BoardRepository {
         return query.getResultList();
     }
 
+    @Transactional
     public Board updateById(Integer id, BoardRequest.UpdateDTO requestDTO) {
         Board board = findById(id);
         board.update(requestDTO);
 
         return board;
     }
+
+    @Transactional
     public void deleteById(Integer id) {
         Board board = findById(id);
 

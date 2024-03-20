@@ -25,9 +25,9 @@ public class BoardController {
     @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        boardRepository.save(requestDTO.toEntity(sessionUser));
+        Board board = boardRepository.save(requestDTO.toEntity(sessionUser));
 
-        return "board/save-form";
+        return "redirect:/board/" + board.getId();
     }
 
     @GetMapping("/" )
@@ -35,7 +35,7 @@ public class BoardController {
         List<Board> boardList = boardRepository.findAll();
         request.setAttribute("boardList", boardList);
 
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/board/{id}")
@@ -43,7 +43,7 @@ public class BoardController {
         Board board = boardRepository.findById(id);
         request.setAttribute("board", board);
 
-        return "board/detail";
+        return "/board/detail";
     }
 
     @GetMapping("/board/{id}/update-form")
@@ -51,14 +51,14 @@ public class BoardController {
         Board board = boardRepository.findById(id);
         request.setAttribute("board", board);
 
-        return "board/update-form";
+        return "/board/update-form";
     }
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO requestDTO) {
         boardRepository.updateById(id, requestDTO);
 
-        return "board/" + id;
+        return "redirect:/board/" + id;
     }
 
     @PostMapping("/board/{id}/delete")
