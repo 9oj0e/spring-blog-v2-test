@@ -14,6 +14,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardRepository boardRepository;
+    private final BoardPersistRepository boardPersistRepository;
 
     @GetMapping("/" )
     public String index(HttpServletRequest request) {
@@ -29,7 +30,7 @@ public class BoardController {
 
     @PostMapping("/board/save")
     public String save(BoardRequest.saveDTO reqDTO) {
-        boardRepository.save(reqDTO);
+        boardPersistRepository.save(reqDTO.toEntity());
         return "redirect:/";
     }
 

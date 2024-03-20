@@ -13,6 +13,10 @@ public class BoardRequest {
             this.title = title;
             this.content = content;
         }
+
+        public Board toEntity() {
+            return new Board(title, content);
+        }
     }
 
     @Data
