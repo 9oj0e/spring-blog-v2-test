@@ -1,7 +1,8 @@
-package shop.mtcoding.blog.controller;
+package shop.mtcoding.blog.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -11,13 +12,28 @@ public class UserController {
         return "user/join-form";
     }
 
+    @PostMapping("/join")
+    public String join() {
+        return "redirect:/";
+    }
+
     @GetMapping("/login-form")
     public String loginForm() {
         return "user/login-form";
     }
 
-    @GetMapping("/user/update-form")
+    @PostMapping("/login")
+    public String login() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/user/{id}/update-form")
     public String updateForm() {
+        return "user/update-form";
+    }
+
+    @PostMapping("/user/{id}/update")
+    public String update() {
         return "user/update-form";
     }
 
