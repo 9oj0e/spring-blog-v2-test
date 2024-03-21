@@ -13,6 +13,17 @@ import java.util.List;
 public class BoardRepository {
     private final EntityManager em;
 
+    @Transactional
+    public void deleteById(int id){
+        String q = """
+                delete from board_tb where id = ?;
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, id);
+        query.executeUpdate();
+
+    }
+
     public BoardResponse.DetailDTO detail(int id){
         String q = """
                 select title, content, username from board_tb where id = ?; 

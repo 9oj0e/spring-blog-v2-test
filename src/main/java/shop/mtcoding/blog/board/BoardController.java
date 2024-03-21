@@ -14,6 +14,13 @@ import java.util.List;
 public class BoardController {
     private final BoardRepository boardRepository;
 
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id){
+        boardRepository.deleteById(id);
+
+        return "redirect:/";
+    }
+
     @PostMapping("/board/save")
     public String upload(BoardRequest.UploadDTO reqDTO){
         boardRepository.upload(reqDTO);
