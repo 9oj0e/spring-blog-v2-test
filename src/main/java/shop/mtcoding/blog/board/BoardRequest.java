@@ -10,4 +10,11 @@ public class BoardRequest {
         private String username;
         private String content;
     }
+
+    @Data
+    public static class UpdateDTO{
+        private String title;
+        private String username;
+        private String content;
+    }
 }

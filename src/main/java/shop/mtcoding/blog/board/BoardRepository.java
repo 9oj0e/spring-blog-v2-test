@@ -14,6 +14,29 @@ public class BoardRepository {
     private final EntityManager em;
 
     @Transactional
+    public void update(int id, BoardRequest.UpdateDTO reqDTO){
+        String q = """
+                update board_tb set title = ?, content = ?, username = ? where id = ?;
+                """;
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, reqDTO.getTitle());
+        query.setParameter(2, reqDTO.getContent());
+        query.setParameter(3, reqDTO.getUsername());
+        query.setParameter(4, id);
+        query.executeUpdate();
+    }
+
+    public Board findById(int id) {
+        String q = """
+                select * from board_tb where id = ?;
+                """;
+        Query query = em.createNativeQuery(q, Board.class);
+        query.setParameter(1, id);
+
+        return (Board)query.getSingleResult();
+    }
+
+    @Transactional
     public void deleteById(int id){
         String q = """
                 delete from board_tb where id = ?;

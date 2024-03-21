@@ -14,6 +14,20 @@ import java.util.List;
 public class BoardController {
     private final BoardRepository boardRepository;
 
+    @PostMapping("/board/{id}/update")
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO){
+        boardRepository.update(id, reqDTO);
+        return "redirect:/board/" + id;
+    }
+
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm(@PathVariable int id, HttpServletRequest request){
+        Board board = boardRepository.findById(id);
+
+        request.setAttribute("board", board);
+        return "/board/update-form";
+    }
+
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id){
         boardRepository.deleteById(id);
