@@ -13,6 +13,23 @@ import java.util.List;
 public class BoardRepository {
     private final EntityManager em;
 
+    public BoardResponse.DetailDTO detail(int id){
+        String q = """
+                select title, content, username from board_tb where id = ?; 
+                """;
+
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, id);
+
+        Object[] row = (Object[]) query.getSingleResult();
+        BoardResponse.DetailDTO dto = new BoardResponse.DetailDTO();
+        dto.setTitle((String)row[0]);
+        dto.setContent((String)row[1]);
+        dto.setUsername((String)row[2]);
+
+        return dto;
+    }
+
     @Transactional
     public void upload(BoardRequest.UploadDTO reqDTO){
         String q = """
